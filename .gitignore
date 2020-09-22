@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Visiual Studio code
 .vscode/
 
@@ -14,3 +13,4 @@ node_modules/
 # build artifacts
 dist/
 private/
+build/

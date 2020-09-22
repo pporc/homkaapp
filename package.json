@@ -59,9 +59,6 @@
   },
   "build": {
     "appId": "com.electron.homkaapp",
-    "publish": {
-      "provider": "github"
-    },
     "copyright": "Copyright 2020 Syoma Jenya",
     "directories": {
       "output": "build"
@@ -72,10 +69,6 @@
       ],
       "target": "nsis",
       "icon": "resources/icon.ico"
-    },
-    "nsis": {
-      "allowToChangeInstallationDirectory": true,
-      "oneClick": false
     }
   }
 }

@@ -14,8 +14,8 @@ if (!store.has(store)) {
   store.set('statistics', {})
 }
 
-const {ipcRenderer} = require('electron');
-ipcRenderer.on('message', function(event, text) {console.log('Message from update',text)})
+// const {ipcRenderer} = require('electron');
+// ipcRenderer.on('message', function(event, text) {console.log('Message from update',text)})
 
 export const App = () => {
 

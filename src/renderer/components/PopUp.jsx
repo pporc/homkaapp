@@ -12,6 +12,7 @@ export default function PopUp(props) {
 
 const popUpStyle = {
 	container: {
+        zIndex: '1000',
 		display: 'relative',
 		position: 'absolute',
         top: '50%',

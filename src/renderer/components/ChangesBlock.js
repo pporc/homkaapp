@@ -51,7 +51,7 @@ export default function ChangesBlock({id, element, val, customField, otherText})
 	}
 
 	return (
-		<td>
+		<td title='Нажмите два раза для редактирования'>
 			{!isChanged && <div onDoubleClick={() => setChanged(true)}>{itemValue}{customField ? ` / ${customField}` : null}{otherText ? otherText : null}</div>}
 			{isChanged && 
 				<input 

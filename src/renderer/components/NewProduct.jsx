@@ -66,7 +66,7 @@ const update = e => {
 const lastFieldHandler = (e) => {
 	if (e.key === 'Enter' && !submitActive) {
 		submit();
-	} if (e.key === 'Tab' || e.key === '9') {
+	} if (e.key === 'Tab') {
 		e.preventDefault()
 		firstField.current.focus();
 	}

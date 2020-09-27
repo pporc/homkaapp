@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
-import RowProduct from './RowProduct.js';
-import NewProduct from './NewProduct.js';
-import PersonalExpenses from './PersonalExpenses.js';
+import RowProduct from './RowProduct.jsx';
+import NewProduct from './NewProduct.jsx';
+import PersonalExpenses from './PersonalExpenses.jsx';
 import {ContextApp} from '../store/reducer.js'
 
 import './Body.less';

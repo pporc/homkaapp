@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {ContextApp} from '../store/reducer.js'
 
-export default function ChangesBlock({id, element, val, customField, otherText}) {
+export default function ChangesBlock({id, element, val, otherText}) {
 
 	const {state, dispatch} = useContext(ContextApp)
 	
@@ -52,7 +52,7 @@ export default function ChangesBlock({id, element, val, customField, otherText})
 
 	return (
 		<td title='Нажмите два раза для редактирования'>
-			{!isChanged && <div onDoubleClick={() => setChanged(true)}>{itemValue}{customField ? ` / ${customField}` : null}{otherText ? otherText : null}</div>}
+			{!isChanged && <div onDoubleClick={() => setChanged(true)}>{itemValue}{otherText ? otherText : null}</div>}
 			{isChanged && 
 				<input 
 				className='form-control'

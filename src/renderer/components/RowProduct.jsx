@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
 import {ContextApp} from '../store/reducer.js'
-import ChangesBlock from './ChangesBlock';
+import ChangesBlock from './ChangesBlock.jsx';
 import PopUp from './PopUp.jsx';
 import { calcNetIncomeItem } from '../store/calc.js';
+import QuantityBlock from './QuantityBlock.jsx';
 
 export default function RowProduct({id, name, quantity, relized = 0, purchasePrice, salePrice}) {
 
@@ -102,7 +103,7 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 			</td>}
 			{!confirmDelete && <>
 				<ChangesBlock id={id} element='name' val={name} otherText={<small className="text-muted float-right">{remainder ? '' : 'нет в наличии'}</small>}/>
-				<ChangesBlock id={id} customField={remainder} element='quantity' val={quantity}/>
+				<QuantityBlock id={id} quantity={quantity} remainder={remainder}/>
 				<td>{relized}
 					<span title='Продать / Вернуть'>
 						<svg onClick={() => setShowPopUp(true)} width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-bag-plus float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -111,8 +112,8 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 						</svg>
 					</span>
 				</td>
-				<ChangesBlock id={id} element='purchasePrice' val={purchasePrice}/>
-				<ChangesBlock id={id} element='salePrice' val={salePrice}/>
+				<ChangesBlock id={id} element='purchasePrice' val={(+purchasePrice).toFixed(2)}/>
+				<ChangesBlock id={id} element='salePrice' val={(+salePrice).toFixed(2)}/>
 				<td>{(salePrice * relized).toFixed(2) || 0}</td>
 				<td>{calcNetIncomeItem(relized, salePrice, purchasePrice) || 0}</td>
 				

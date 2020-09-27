@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import {ContextApp, initialState, reducer} from './store/reducer.js'
-import {Header} from './components/Header.js';
-import {Body} from './components/Body.js';
+import {Header} from './components/Header.jsx';
+import {Body} from './components/Body.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 import store from './store/bd.js';
 

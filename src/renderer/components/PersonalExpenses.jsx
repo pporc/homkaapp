@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import {ContextApp} from '../store/reducer.js'
-import PersonalExpensesRow from './PorsonalExpensisRow.jsx'
+import PersonalExpensesRow from './PersonalExpensisRow.jsx'
 import { calcPersonalExpenses } from '../store/calc.js'
 
 export default function PersonalExpenses(props) {
@@ -12,7 +12,7 @@ export default function PersonalExpenses(props) {
 
 	const [toggle ,setToggle] = useState(false)
 	const [disableBtn, setDisableBtn] = useState(true)
-	const [sum, setSum] = useState(0)
+	const [sum, setSum] = useState('')
 	const [description, setDescription] = useState('')
 
 	useEffect(() => {
@@ -56,7 +56,7 @@ export default function PersonalExpenses(props) {
 			}
 		})
 		setDescription('');
-		setSum(0)
+		setSum('')
 		firstField.current.focus();
 		setToggle(true)
 	

@@ -103,7 +103,7 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 			</td>}
 			{!confirmDelete && <>
 				<ChangesBlock id={id} element='name' val={name} otherText={<small className="text-muted float-right">{remainder ? '' : 'нет в наличии'}</small>}/>
-				<QuantityBlock id={id} quantity={quantity} remainder={remainder}/>
+				<QuantityBlock name={name} id={id} quantity={quantity} remainder={remainder}/>
 				<td>{relized}
 					<span title='Продать / Вернуть'>
 						<svg onClick={() => setShowPopUp(true)} width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-bag-plus float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

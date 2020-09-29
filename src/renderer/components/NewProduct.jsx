@@ -17,7 +17,8 @@ const [form, setForm] = useState({
 	quantity: '', 
 	purchasePrice: '', 
 	salePrice: '',
-	relized: 0
+	relized: 0,
+	date: Date.now()
 });
 
 useEffect(() => {

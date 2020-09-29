@@ -29,6 +29,7 @@ const schema = {
             relized: {type: "number", default: 0},
             BuyRelized: {type: "number"},
             remainder: {type: "number"},
+            date: {type: "date"}
         }
     },
     personalExpensis: {
@@ -43,8 +44,8 @@ const schema = {
         properties: {
             id: 'number',
             action: 'text',
-            count: 'text',
-            data: 'date'
+            oldCount: 'text',
+            newCount: 'text'
         }
 
     }

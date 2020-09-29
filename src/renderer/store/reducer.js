@@ -85,6 +85,17 @@ export const reducer = (state, action) => {
                         description: action.payload.description
                     }
                 }
+            };
+        case 'statistics':
+            let statDate = Date.now()
+            return {
+                ...state,
+                statistics: {
+                    ...state.statistics,
+                    [statDate]: {
+                        ...action.payload
+                    }
+                }
             }
 
         default:

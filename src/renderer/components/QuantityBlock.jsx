@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {ContextApp} from '../store/reducer.js'
 import {Modal, Button, Card} from 'react-bootstrap'
-import PopUp from './PopUp.jsx'
 
 export default function QuantityBlock({name, id, quantity, remainder}) {
 
@@ -46,6 +45,15 @@ function MyVerticallyCenteredModal(props) {
           id: props.id,
           element: 'quantity',
           value: Number(props.quantity) + Number(val)
+        }
+      })
+      dispatch({
+        type: "statistics",
+        payload: {
+          id: props.id,
+          action: 'addQuantity',
+          oldCount: Number(props.quantity),
+          newCount: Number(props.quantity) + Number(val)
         }
       })
     }

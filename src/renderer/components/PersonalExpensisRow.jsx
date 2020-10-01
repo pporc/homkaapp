@@ -12,6 +12,15 @@ export default function PersonalExpensisRow(props) {
                 id: props.time
             }
         })
+        dispatch({
+            type: 'statistics',
+            payload: {
+                action: 'deleteExpenses',
+                sum: props.sum,
+                description: props.description,
+                id: props.time
+            }
+        })
     }
     return (
         <tr>

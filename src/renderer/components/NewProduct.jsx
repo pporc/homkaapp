@@ -45,6 +45,14 @@ const submit = () => {
 			}
 		}
 	})
+	dispatch({
+		type: 'statistics',
+		payload: {
+			action: 'newProduct',
+			...form,
+			id: newId
+		}
+	})
 	
 	setForm({
 		name: '', 

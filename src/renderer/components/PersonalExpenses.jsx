@@ -46,11 +46,20 @@ export default function PersonalExpenses(props) {
 		} else {
 			newSum = sum;
 		}
-
+		let date = Date.now()
 		dispatch({
 			type: 'addPersonalExpensis',
 			payload: {
-				id: Date.now(),
+				id: date,
+				sum: newSum,
+				description
+			}
+		})
+		dispatch({
+			type: 'statistics',
+			payload: {
+				action: 'addPersonalExpenses',
+				id: date,
 				sum: newSum,
 				description
 			}

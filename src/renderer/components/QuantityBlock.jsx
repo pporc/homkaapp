@@ -50,6 +50,7 @@ function MyVerticallyCenteredModal(props) {
       dispatch({
         type: "statistics",
         payload: {
+          name: props.name,
           id: props.id,
           action: 'addQuantity',
           oldCount: Number(props.quantity),

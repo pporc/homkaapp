@@ -5,10 +5,9 @@ import {Modal} from 'react-bootstrap'
 import { calcNetIncomeItem } from '../store/calc.js';
 import QuantityBlock from './QuantityBlock.jsx';
 
-export default function RowProduct({id, name, quantity, relized = 0, purchasePrice, salePrice}) {
+export default function RowProduct({id, name, quantity, relized = 0, purchasePrice, salePrice, date}) {
 
 	const {state, dispatch} = useContext(ContextApp)
-	//const [showPopUp, setShowPopUp] = useState(false)
 	const [modalShow, setModalShow] = useState(false);
 	const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -16,11 +15,23 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 	const remainder = Number.isInteger(remainderCalc) ? remainderCalc : remainderCalc.toFixed(2)
 
 	const deleteItem = (id) => {
-		console.log('deleted id'+id)
 		dispatch({
 			type: 'delete',
 			payload: {
 				id: id
+			}
+		})
+		dispatch({
+			type: 'statistics',
+			payload: {
+				id: id,
+				action: 'deleteProduct',
+				name,
+				quantity,
+				relized,
+				purchasePrice,
+				salePrice,
+				date
 			}
 		})
 	}
@@ -65,36 +76,6 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 				id={id}
 				name={name}
             />
-			
-			{/* {showPopUp && <PopUp close={() => closePopUp()} tab={activeTab}>
-				<div className='card-body'>
-					<ul className="nav nav-tabs" id="myTab" role="tablist">
-						<li className="nav-item" role="presentation" onClick={() => (setActiveTab(true))}>
-							<span className={activeTab ? 'nav-link active': 'nav-link'} id="profile-tab">Продажа</span>
-						</li>
-						<li className="nav-item" role="presentation" onClick={() => (setActiveTab(false))}>
-							<span className={!activeTab ? 'nav-link active': 'nav-link'} id="contact-tab">Возврат</span>
-						</li>
-					</ul>
-					<div className="tab-content" id="myTabContent">
-						<div  className={activeTab ? 'tab-pane fade show active': 'tab-pane fade'} id="home">
-							<p>Введите количество товара, доступно {remainder}</p>
-							<input className='form-control' type='number' disabled={!remainder} autoFocus onKeyDown={inputRelizedHandler} onChange={onChangeHandler}/>
-							<p>Сумма к оплате: {(relizedCount * salePrice).toFixed(2)}грн</p>
-							<button className='btn btn-success' onClick={relizedHandler}>Подтвердить</button>
-							<button className='btn btn-danger' style={{marginLeft: '10px'}} onClick={() => closePopUp()}>Отменить</button>
-						</div>
-						<div  className={!activeTab ? 'tab-pane fade show active': 'tab-pane fade'} id="profile">
-							<p>Введите количество возвращаемого товара</p>
-							<input className='form-control' type='number' disabled={relized === 0} autoFocus onKeyDown={inputReturnHandler} onChange={onChangeReturnHandler}/>
-							<p>Сумма возврата: {(returnCount * salePrice).toFixed(2)}</p>
-							<button className='btn btn-success' onClick={returnHandler}>Подтвердить</button>
-							<button className='btn btn-danger' style={{marginLeft: '10px'}} onClick={() => closePopUp()}>Отменить</button>
-						</div>
-					</div>	
-				</div>
-			</PopUp>} */}
-
 		</tr>
 	);
 }
@@ -149,6 +130,8 @@ function MyVerticallyCenteredModal(props) {
 		dispatch({
 			type: "statistics",
 			payload: {
+				name: props.name,
+				salePrice: props.saleprice,
 				id: props.id,
 				action: 'return',
 				oldCount: props.remainder,
@@ -170,6 +153,8 @@ function MyVerticallyCenteredModal(props) {
 		dispatch({
 			type: "statistics",
 			payload: {
+				name: props.name,
+				salePrice: props.saleprice,
 				id: props.id,
 				action: 'relized',
 				oldCount: props.remainder,
@@ -191,7 +176,6 @@ function MyVerticallyCenteredModal(props) {
 		setRelizedCount(0)
 		setReturnCount(0)
 	}
-	console.log(state)
 
     return (
       <Modal
@@ -216,7 +200,7 @@ function MyVerticallyCenteredModal(props) {
 			</ul>
 			<div className="tab-content" id="myTabContent">
 				<div  className={activeTab ? 'tab-pane fade show active': 'tab-pane fade'} id="home">
-					<p>Введите количество товара, доступно {props.remainder}</p>
+					<p>Введите количество товара (доступно {props.remainder})</p>
 					<input className='form-control' type='number' disabled={!props.remainder} autoFocus onKeyDown={inputRelizedHandler} onChange={onChangeHandler}/>
 					<p>Сумма к оплате: {(relizedCount * props.saleprice).toFixed(2)}грн</p>
 					<button className='btn btn-success' onClick={relizedHandler}>Подтвердить</button>

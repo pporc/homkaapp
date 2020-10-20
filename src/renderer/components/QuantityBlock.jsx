@@ -62,7 +62,6 @@ function MyVerticallyCenteredModal(props) {
     const confirmHandler = () => {
         addNewQuantity(inputValue)
         setInputValue('')
-        console.log(state)
     }
 
     return (

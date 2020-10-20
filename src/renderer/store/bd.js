@@ -16,6 +16,12 @@ const schema = {
             },
             deletedProducts: {
                 type: "object"
+            },
+            backup: {
+                type: 'number'
+            },
+            saveBackup: {
+                type: 'number'
             }
         }
 	},

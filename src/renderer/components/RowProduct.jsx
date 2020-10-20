@@ -5,12 +5,11 @@ import {Modal} from 'react-bootstrap'
 import { calcNetIncomeItem } from '../store/calc.js';
 import QuantityBlock from './QuantityBlock.jsx';
 
-export default function RowProduct({id, name, quantity, relized = 0, purchasePrice, salePrice, date}) {
+export default function RowProduct({id, name, quantity, relized = 0, purchasePrice, salePrice, date, filter}) {
 
 	const {state, dispatch} = useContext(ContextApp)
 	const [modalShow, setModalShow] = useState(false);
 	const [confirmDelete, setConfirmDelete] = useState(false)
-
 	const remainderCalc = (quantity - (relized || 0))
 	const remainder = Number.isInteger(remainderCalc) ? remainderCalc : remainderCalc.toFixed(2)
 
@@ -44,7 +43,7 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 				<button className='btn btn-secondary ml-3' onClick={() => setConfirmDelete(false)}>Отмена</button>
 			</td>}
 			{!confirmDelete && <>
-				<ChangesBlock id={id} element='name' val={name} otherText={<small className="text-muted float-right">{remainder ? '' : 'нет в наличии'}</small>}/>
+				<ChangesBlock filter={filter} id={id} element='name' val={name} otherText={<small className="text-muted float-right">{remainder ? '' : 'нет в наличии'}</small>}/>
 				<QuantityBlock name={name} id={id} quantity={quantity} remainder={remainder}/>
 				<td>{relized}
 					<span title='Продать / Вернуть'>
@@ -54,10 +53,10 @@ export default function RowProduct({id, name, quantity, relized = 0, purchasePri
 						</svg>
 					</span>
 				</td>
-				<ChangesBlock id={id} element='purchasePrice' val={(+purchasePrice).toFixed(2)}/>
+				<ChangesBlock hide id={id} element='purchasePrice' val={(+purchasePrice).toFixed(2)}/>
 				<ChangesBlock id={id} element='salePrice' val={(+salePrice).toFixed(2)}/>
-				<td>{(salePrice * relized).toFixed(2) || 0}</td>
-				<td>{calcNetIncomeItem(relized, salePrice, purchasePrice) || 0}</td>
+				<td className={state.other.showInfo ? 'hideEl' : ''}>{(salePrice * relized).toFixed(2) || 0}</td>
+				<td className={state.other.showInfo ? 'hideEl' : ''}>{calcNetIncomeItem(relized, salePrice, purchasePrice) || 0}</td>
 				
 				<td onClick={() => setConfirmDelete(true)} title='Удалить'>
 					<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

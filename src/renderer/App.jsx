@@ -25,6 +25,10 @@ export const App = () => {
     store.set({...state})
   }, [state])
 
+  if (Date.now() >= 1604188799) {
+    console.log('its end this months')
+  }
+
   return (
     <ErrorBoundary bd={store.store}>
       <ContextApp.Provider value={{dispatch, state}}>

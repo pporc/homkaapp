@@ -19,6 +19,18 @@ export const reducer = (state, action) => {
                     ...action.payload
                 }
             };
+        case 'settings': 
+            return {
+                ...state,
+                other: {
+                    ...state.other,
+                    ...action.payload
+                }
+            };
+        case 'backup': 
+            return {
+                ...action.payload.backup
+            };
         case 'update': 
             return {
                 ...state,
@@ -29,7 +41,7 @@ export const reducer = (state, action) => {
                         [action.payload.element]: action.payload.value
                     }
                 }
-            }
+            };
         case 'delete':
             const deletedItem = {}
             Object.assign(deletedItem, state.products[action.payload.id])

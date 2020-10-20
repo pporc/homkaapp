@@ -76,7 +76,7 @@ export default function PersonalExpenses(props) {
 	}
 
 	return (
-		<div className="card col-md-4" style={{padding: '0', border: 'none'}}>
+		<div className={state.other.showInfo ? 'hideEl' : 'card col-md-3'} style={{padding: '0', border: 'none'}}>
 			<div className='card-header bg-info'>Персональные расходы</div>
 				<table className="table table-bordered" style={{marginBottom: '0'}}>
 					<thead>
@@ -98,8 +98,8 @@ export default function PersonalExpenses(props) {
 					</tbody>
 					<tfoot>
 						<tr>
-							<td><input ref={ firstField } value={sum} min='0' className='form-control' type='number' onFocus={(e) => e.target.select()} onChange={fieldHandler}/></td>
-							<td><input ref={ lastField } value={description} className='form-control' type='text' onKeyDown={lastFieldHandler} onChange={fieldHandler}/></td>
+							<td><input title='Сумма' ref={ firstField } value={sum} min='0' className='form-control' type='number' onFocus={(e) => e.target.select()} onChange={fieldHandler}/></td>
+							<td><input title='Описание' ref={ lastField } value={description} className='form-control' type='text' onKeyDown={lastFieldHandler} onChange={fieldHandler}/></td>
 							<td><input type='button' className='btn btn-success' disabled={disableBtn} value='добавить' onClick={submitHandler}/></td>
 						</tr>
 					</tfoot>

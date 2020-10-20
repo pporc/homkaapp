@@ -3,9 +3,6 @@ import {ContextApp} from '../store/reducer.js'
 
 export default function NewProduct(props) {
 
-//TODO: fix render component after create new product
-//add clear input
-
 const {state, dispatch} = useContext(ContextApp)
 
 const firstField = useRef(null)
@@ -82,14 +79,13 @@ const lastFieldHandler = (e) => {
 }
 
 	return (
-		<tfoot>
+		<tfoot style={{position: 'fixed', bottom: '0', backgroundColor: 'white', maxWidth: '1148px', width: '75%'}}>
 				<tr>
 					<td><input className='form-control' ref={firstField} title="Название товара" value={form.name} type="text" name="name" placeholder="Название" onChange={update}/></td>
 					<td><input className='form-control' min='0' title="Закуплено" value={form.quantity} type="number" name="quantity" placeholder="Закуплено" onChange={update}/></td>
-					<td>&nbsp;</td>
 					<td><input className='form-control' min='0' title="Цена закупки" value={form.purchasePrice} type="number" name="purchasePrice" placeholder="Цена закупки" onChange={update}/></td>
 					<td><input className='form-control' min='0' title="Цена продажи" value={form.salePrice} type="number" name="salePrice" placeholder="Цена продажи" onKeyDown={lastFieldHandler} onChange={update}/></td>
-					<td colSpan='3'><button className={submitActive ? "btn btn-secondary" : "btn btn-success"} disabled={submitActive} onClick={submit}>Добавить</button></td>
+					<td colSpan='3'><button style={{width: '204px'}} className={submitActive ? "btn btn-secondary" : "btn btn-success"} disabled={submitActive} onClick={submit}>Добавить</button></td>
 				</tr>
 		</tfoot>
 	);

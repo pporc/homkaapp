@@ -33,6 +33,8 @@ export function RecentActions ({actions}) {
                 return ['primary', 'Добавлен товар на склад', '']
             case 'relized': 
                 return ['success', 'Продажа', '']
+            case 'cheque': 
+                return ['success', 'Продажа', '']
             case 'return': 
                 return ['warning', 'Возврат', '']
             default:
@@ -56,6 +58,8 @@ export function RecentActions ({actions}) {
                 return itemTable(item)
             case 'return':
                 return itemTable(item)
+            case 'cheque':
+                return chequeTable(item)
             default:
                 return (<pre>{JSON.stringify(item, null, 2)}</pre>)
         }
@@ -85,12 +89,45 @@ export function RecentActions ({actions}) {
         </Container>
     )
 
+    const chequeTable = (item) => (
+        <Container>
+            <Row className='row-cols-2'>
+                {item.data.map((arr, i) => (
+                    <Col key={i}>
+                        <Table size="sm">
+                            {arr.map( (val, i) => (
+                                <tbody key={i}>
+                                    {Object.keys(val).map((v, i) => {
+                                        if (translate[v] !== undefined) {
+                                            return (
+                                                <tr key={i}>
+                                                    <td>{translate[v]}</td>
+                                                    <td>{v === 'date' ? new Date(Number(val[v])).toLocaleDateString() : val[v]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                    })}
+                                </tbody>
+                            ))}
+                            <tfoot style={{fontWeight: 'bold'}}>
+                                <tr>
+                                    <td>Продано</td>
+                                    <td>{arr[1]}</td>
+                                </tr>
+                            </tfoot>
+                        </Table>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
+    )
+
     const translate = {
         name: 'Имя',
-        quantity: 'Количество',
-        purchasePrice: 'Цена покупки',
+        quantity: 'Закупленно',
+        //purchasePrice: 'Цена покупки',
         salePrice: 'Цена продажи',
-        relized: 'Продано',
+        relized: 'Продано ранее',
         date: 'Дата создания',
         sum: 'Сумма',
         description: 'Описание',
@@ -109,6 +146,11 @@ export function RecentActions ({actions}) {
                             {<b className='ml-5'>{getStyleVariant(val.action)[1]}</b>}
                             {val.action === 'relized' ?
                                 <span className='float-right'>{`+ ${((val.oldCount - val.newCount) * val.salePrice).toFixed(2)}грн`}</span>
+                                : null}
+                            {val.action === 'cheque' ?
+                                <span className='float-right'>{`+ ${val.data.reduce(function(sum, arg) {
+                                    return sum + (arg[1] * arg[0].salePrice)
+                                    }, 0).toFixed(2)}грн`}</span>
                                 : null}
                             {val.action === 'addQuantity' ?
                                 <span className='float-right'>{val.oldCount} + {val.newCount - val.oldCount}</span>

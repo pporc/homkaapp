@@ -1,7 +1,7 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {ContextApp} from '../store/reducer.js'
 
-export default function ChangesBlock({id, element, val, otherText}) {
+export default function ChangesBlock({id, element, val, otherText, filter}) {
 
 	const {state, dispatch} = useContext(ContextApp)
 	
@@ -51,7 +51,7 @@ export default function ChangesBlock({id, element, val, otherText}) {
 	}
 
 	return (
-		<td title='Нажмите два раза для редактирования'>
+		<td className={state.other.showInfo && element === 'purchasePrice' ? 'hideEl' : ''} title='Нажмите два раза для редактирования'>
 			{!isChanged && <div onDoubleClick={() => setChanged(true)}>{itemValue}{otherText ? otherText : null}</div>}
 			{isChanged && 
 				<input 
